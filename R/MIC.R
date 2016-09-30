@@ -54,6 +54,8 @@
 #'   ## 1 1 1
 #'
 #' }
+#'
+#' @export
 MIC <- function(X,K,NumRun,# Required pars
                 a = 1, b = 1,
                 IndivAlpha = TRUE,

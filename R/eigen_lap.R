@@ -17,6 +17,7 @@
 #' @examples
 #' Later on
 #'
+#' @export
 eigen_lap <- function(X, D){
   nc <- dim(X) [1]
   ne <- dim(X) [3]

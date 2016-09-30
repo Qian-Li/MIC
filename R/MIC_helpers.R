@@ -17,6 +17,8 @@
 #'
 #' clust_align(Z1, Z2, type = 'vec')
 #'
+#' @export
+
 clust_align <- function(Z1, Z2, type = 'vec'){
   if (type == 'vec'){
     for (k in 1:length(unique(Z1))){
@@ -56,6 +58,8 @@ clust_align <- function(Z1, Z2, type = 'vec'){
 #'   \item{\code{vec}}{A vector of Frobenius norm to the mean affinity}
 #'
 #' @seealso \code{\link{MIC}} for its usage in MCMC, \code{\link{clust_align}} for clusters alignment.
+#'
+#'
 HardCluster <- function(ClustList){
   numit <- dim(ClustList) [1]
   Ckern <- 0

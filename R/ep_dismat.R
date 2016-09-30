@@ -27,6 +27,7 @@
 #' @examples
 #' Later on
 #'
+#' @export
 ep_dismat <- function(X,
                       sf,
                       par.spectrum = c(100, sf/2, 512),

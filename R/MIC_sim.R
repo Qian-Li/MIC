@@ -37,6 +37,7 @@
 #' x_nstat <- MIC_sim(alpha = 0.9, nsub = 2, segs = 10, fs = 100)
 #' x_nstat$Points
 #'
+#' @export
 MIC_sim <- function(alpha,
                     nsub,
                     segs,

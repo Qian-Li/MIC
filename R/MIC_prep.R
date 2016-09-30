@@ -29,6 +29,7 @@
 #'@seealso \code{\link{spec.parzen}} for spectral estimate, \code{\link{ep_dismat}} for epoch smoothing, \code{\link{eigen_lap}} for eigen-Laplacian
 #'  and \code{\link{MIC_sim}} for time series simulation.
 #'
+#' @export
 MIC_prep <- function(X, d,
                      exclude = c(),
                      par.spectrum = c(50),

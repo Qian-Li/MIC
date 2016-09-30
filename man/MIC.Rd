@@ -71,6 +71,7 @@ A list of objects with the following components:
   ## 1 1 1
 
 }
+
 }
 \references{
 Qian Li, Damla Senturk, Catherine A. Sugar, Shanali Jeste, Charlotte DiStefano, Joel Frohlich, Donatello Telesca

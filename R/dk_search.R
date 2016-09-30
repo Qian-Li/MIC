@@ -30,6 +30,7 @@
 #'
 #' }
 #'
+#' @export
 dk_search <- function(X_array,
                       max_d = 10,
                       n.iter,
