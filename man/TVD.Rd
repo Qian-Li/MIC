@@ -25,6 +25,5 @@ f1 <- dbeta(w, 2, 2); f2 <- dbeta(w, 2, 5)
 
 TVD(w, f1, f2)
 TVD(w, f2, f1)
-
 }
 

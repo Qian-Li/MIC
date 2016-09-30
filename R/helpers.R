@@ -14,7 +14,7 @@
 #'
 #' TVD(w, f1, f2)
 #' TVD(w, f2, f1)
-#'
+#' @export
 TVD <- function(w, f1, f2){
   #Compute TV distance using the trapezoidal rule
   if (length(w) != length(f1) | length(w) != length(f2)) stop("w, f1 and f2 must have the same length")
@@ -47,10 +47,13 @@ TVD <- function(w, f1, f2){
 #' @return A \code{nn}-by-2 matrix, with the first column being the estimated frequencies,
 #'   and the second column being the esimated spectrum.
 #' @examples
+#' \dontrun{
 #' x <- rnorm(100)
 #' spec <- spec.parzen(x, a = 50, nn = 50)
 #'
 #' plot(spec, type = 'l')
+#' }
+#' @export
 
 
 spec.parzen <- function( x,

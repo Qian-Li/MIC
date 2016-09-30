@@ -14,8 +14,7 @@
 #' @return A list of objects with the following components:
 #'   \item{\code{eig_data}}{A 3-D array of the Eigen-Laplacian representation.}
 #'   \item{\code{eig_value}}{Corresponding eigen-values of the extracted eigen-vectors}
-#' @examples
-#' Later on
+#'
 #'
 #' @export
 eigen_lap <- function(X, D){

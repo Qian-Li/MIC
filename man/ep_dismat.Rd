@@ -39,8 +39,4 @@ The distance metric is based on the \code{\link{TVD}} between a pair of spectral
 Epochs are constructed by combining adjacent units (segments), which are further allowed
   to overlap with each other at certain amount.
 }
-\examples{
-Later on
-
-}
 

@@ -33,6 +33,7 @@ A list of objects with the following components:
 \code{MIC_sim} simulates multivariate picewise stationary time series for a sample of subjects.
 }
 \examples{
+\dontrun{
 # Stationary simulation:
 
 x_stat <- MIC_sim(alpha = 0.9, nsub = 2, segs = 10, fs = 100)
@@ -49,7 +50,7 @@ x_stat <- MIC_sim(alpha = 0.9, nsub = 2, segs = 10, fs = 100)
 
 x_nstat <- MIC_sim(alpha = 0.9, nsub = 2, segs = 10, fs = 100)
 x_nstat$Points
-
+}
 }
 \references{
 Qian Li, Damla Senturk, Catherine A. Sugar, Shanali Jeste, Charlotte DiStefano, Joel Frohlich, Donatello Telesca

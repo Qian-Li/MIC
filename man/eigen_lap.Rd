@@ -24,10 +24,6 @@ A list of objects with the following components:
 This procedure is a direct implementation of the spectral clustering technique explicated by [Ng 2001].
 It is also a preprocessing step for \code{\link{MIC}}, following distance characterization by \code{\link{ep_dismat}}.
 }
-\examples{
-Later on
-
-}
 \references{
 Ng, Andrew Y., Michael I. Jordan, and Yair Weiss. \emph{On spectral clustering: Analysis and an algorithm.}
   Advances in neural information processing systems 2 (2002): 849-856.

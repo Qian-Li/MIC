@@ -24,8 +24,7 @@
 #'   \item{\code{diss_array}}{Pairwise distance array, No.objects*No.objects*No.epochs}
 #'   \item{\code{ave_spec}}{Epochwise average spectral estimates using \code{\link{spec.parzen}}}
 #'   \item{\code{fw}}{Frequencies used for spectral estimate}
-#' @examples
-#' Later on
+#'
 #'
 #' @export
 ep_dismat <- function(X,
