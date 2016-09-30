@@ -4,9 +4,9 @@ Title: Multilevel Integrative Clustering
 Version: 0.1
 Date: 2016-09-28
 Authors@R: "Qian Li <qianl@ucla.edu> [aut, cre]"
-Description: (Detailed description of the package, later ...)
-License: What license is it under?
-LazyData: TRUE
+Description: MIC package performs integrative clustering on highly stuctured data.
+License: GPL-2
+LazyData: FALSE
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 Imports: gtools,
