@@ -3,16 +3,17 @@
 #' \code{MIC} implements integrative clustering on highly structured data. The admissible structure contains repeated measurements
 #'   from multiple subjects, where both a group clustering and individual clusterings are of inferential interests.
 #'
-#' @param X list of lists, and each sublist contains data matrices of the same size
+#' @param X list of lists, and each sublist contains data matrices of the same size, for a proper format see
+#'   the output of \code{\link{MIC_prep}}
 #' @param K integer, number of clusters
 #' @param NumRun number of iterations for MCMC sampling, with 1/5 used for burn-in
 #' @param a numeric, hyperparameter for adherence ~ TBeta(a, b)
 #' @param b numeric, hyperparameter for adherence ~ TBdta(a, b)
 #' @param IndivAlpha boolean, whether to assume individual adherence (population - subjects)
 #' @param IndivBeta boolean, whether to assume individual adherence (subjects - epochs)
-#' @param Concentration yyperparameter for Dirichlet prior
-#' @param adj numeric, adjustment term for label sampling with default at \code{5e-05}
-#' @param block unit size of MCMC samples to be written externally (memory saving!)
+#' @param Concentration numeric, hyperparameter for Dirichlet prior
+#' @param adj numeric, adjustment term for label sampling with default of \code{5e-05}
+#' @param block integer, unit size of MCMC samples to be written externally (\strong{memory saving!})
 #' @param time.start the start of code timing
 #' @return A list of objects with the following components:
 #'   \item{\code{Alpha, AlphaBounds}}{point estimates and CIs of subject adherence to a group estimate}
@@ -24,7 +25,7 @@
 #'   \item{\code{...}}{variability measures, posterior clustering probability matrices, etc. Please see our manuscript for details}
 #' @references Qian Li, Damla Senturk, Catherine A. Sugar, Shanali Jeste, Charlotte DiStefano, Joel Frohlich, Donatello Telesca
 #'   "\emph{Inferring Brain Signals Synchronicity from a Sample of EEG Readings}".
-#' @seealso \code{\link{eigen_lap}} and \code{\link{ep_dismat}} for data preparation, \code{\link{spec.parzen}} for the estimation
+#' @seealso \code{\link{eigen_lap}}, \code{\link{ep_dismat}} and \code{\link{MIC_prep}} for data preparation, \code{\link{spec.parzen}} for the estimation
 #'   of spectrum and \code{\link{TVD}} for pairwise distance metric, \code{\link{HardCluster}} for point clustering estimate from
 #'   MCMC samples.
 #' @examples
@@ -33,26 +34,30 @@
 #'   # Time Series simulation:
 #'   ts_sim <- MIC_sim(alpha = 0.9, nsub = 3, segs = 10, fs = 100)
 #'
-#'   # Data preparation:
 #'
+#'   # Data preparation:
 #'   list_data <- list()
-#'   for (i in 1:length(ts_sim$Data)) list_data[[i]] <- MIC_prep(X = ts_sim$Data[[i]], d = 4, par.spectrum = c(50, 50, 100), par.win = c(3, 1))
+#'   for (i in 1:3) list_data[[i]] <- MIC_prep(X = ts_sim$Data[[i]], d = 4,
+#'     par.spectrum = c(50, 50, 100), par.win = c(3, 1))
+#'
+#'
 #'
 #'   # MIC: (Running time: 3mins)
-#'
 #'   output <- MIC(X = list_data, K = 4, NumRun = 5000)
 #'
-#'   # Clustering accuracy: group level
 #'
-#'   sum(clust_align(ts_sim$C, output$Cbest, type = 'vec') == ts_sim$C) / length(ts_sim$C)
+#'
+#'   # Clustering accuracy: group level
+#'   sum(clust_align(ts_sim$C, output$Cbest, type = 'vec') == ts_sim$C) / 40
 #'   ## [1] 1
+#'
 #'
 #'   # Clustering accuracy: individual level
 #'   for (i in 1:3){
-#'   cat(sum(clust_align(ts_sim$Ci[, i], output$Cibest[, i], type = 'vec') == ts_sim$Ci[, i]) / length(ts_sim$Ci[, i]), '\n')
+#'   aligned_label <- clust_align(ts_sim$Ci[, i], output$Cibest[, i], type = 'vec')
+#'   cat(sum(aligned_label == ts_sim$Ci[, i]) / 40, '\n')
 #'   }
 #'   ## 1 1 1
-#'
 #' }
 #'
 #' @export
@@ -64,13 +69,8 @@ MIC <- function(X,K,NumRun,# Required pars
                 adj = 5e-05,
                 block = 1000,
                 time.start = Sys.time()){
+  # ------ MIC starts
   cat('--- New MIC session: ---','\n')
-  # ------ Loading dependent functions:
-  pam <- cluster::pam
-  rdirichlet <- gtools::rdirichlet
-  # ------ Quick helpers:
-  logSum <- function(l) {max(l) + log(sum(exp(l - max(l))))}
-  margPi <- function(p,a){return(p * a + (1 - p) * (1 - a) / (length(p) - 1))}
   # ------ Initialization
   #	# Hyper pars
   Gamma <- rep(1, K) #Dirichlet concentration
@@ -163,7 +163,7 @@ MIC <- function(X,K,NumRun,# Required pars
       if (D [[n]][[m]] > 1) mu0 [[n]][[m]] <- colMeans(X [[n]][[m]]) #m0 by overal mean
       if (D [[n]][[m]] == 1) mu0 [[n]][[m]] <- mean(X [[n]][[m]])
 
-      InitL <- pam(X [[n]][[m]], K) ## Replaced Kmeans for its instability.
+      InitL <- cluster::pam(X [[n]][[m]], K) ## Replaced Kmeans for its instability.
 
       if (m == 1) {now_cluster <- InitL$clustering} else {
         temp_cluster <- clust_align(now_cluster, InitL$clustering, type = 'vec')
@@ -372,7 +372,7 @@ MIC <- function(X,K,NumRun,# Required pars
 
     #Update Pi
     Gamma <- Concentration+colSums(C)
-    Pi <- rdirichlet(1, Gamma)
+    Pi <- gtools::rdirichlet(1, Gamma)
 
     update_index <- (run - 1) %% block + 1
 

@@ -19,11 +19,4 @@ A scalar, in range [0,1] if both \code{f1} and \code{f2} are normalized densitie
 \description{
 \code{TVD} returns the Total Variation Distance between two densities.
 }
-\examples{
-w <- seq(0, 1, by =.05)
-f1 <- dbeta(w, 2, 2); f2 <- dbeta(w, 2, 5)
-
-TVD(w, f1, f2)
-TVD(w, f2, f1)
-}
 

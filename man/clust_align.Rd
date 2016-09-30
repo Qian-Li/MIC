@@ -7,23 +7,23 @@
 clust_align(Z1, Z2, type = "vec")
 }
 \arguments{
-\item{Z1}{Clustering assignment No.1 (reference).}
+\item{Z1}{vector or matrix, clustering assignment 1 (reference).}
 
-\item{Z2}{Clustering assignment No.2 (to be adjusted).}
+\item{Z2}{vector or matrix, clustering assignment 2 (to be relabeled).}
 
-\item{type}{Option of '\emph{vec}' and '\emph{mat}' as input format.}
+\item{type}{what type of input format: "\code{vec}" or "\code{mat}"}
 }
 \value{
-\code{Z2} aligned against \code{Z1} achieving maximal concordance.
+\code{Z2}, aligned against \code{Z1} with maximal concordance.
 }
 \description{
-\code{clust_align} aligns two cluster assignments by relabelling the membership for
-  a maximized concordance
+\code{clust_align} aligns two cluster assignments by a maximally concordant relabeling
 }
 \details{
 This aligner can take both \emph{vector} and \emph{matrix} clustering assignments, and aligns
-  the second assignment maximally against the first assignment. It aims at reshuffling of
-  cluster labels to facilitate a fair comparision between two clustering result.
+  the second assignment against the first assignment. It reshuffles the second assignment labels
+  such that two assignemnts are maximally matched. This procedure facilitates a direct and
+  fair comparision between two clustering result.
 }
 \examples{
 Z1 <- c(1:5)

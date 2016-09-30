@@ -8,13 +8,7 @@
 #' @param f1 Density 1 evaluated at values \code{w}.
 #' @param f2 Density 2 evaluated at values \code{w}.
 #' @return A scalar, in range [0,1] if both \code{f1} and \code{f2} are normalized densities.
-#' @examples
-#' w <- seq(0, 1, by =.05)
-#' f1 <- dbeta(w, 2, 2); f2 <- dbeta(w, 2, 5)
 #'
-#' TVD(w, f1, f2)
-#' TVD(w, f2, f1)
-#' @export
 TVD <- function(w, f1, f2){
   #Compute TV distance using the trapezoidal rule
   if (length(w) != length(f1) | length(w) != length(f2)) stop("w, f1 and f2 must have the same length")
@@ -50,6 +44,7 @@ TVD <- function(w, f1, f2){
 #' \dontrun{
 #' x <- rnorm(100)
 #' spec <- spec.parzen(x, a = 50, nn = 50)
+#'
 #'
 #' plot(spec, type = 'l')
 #' }

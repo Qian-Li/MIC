@@ -44,6 +44,7 @@ Parzen window estimator works the best when the true spectrum is continuous, and
 x <- rnorm(100)
 spec <- spec.parzen(x, a = 50, nn = 50)
 
+
 plot(spec, type = 'l')
 }
 }

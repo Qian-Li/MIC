@@ -8,10 +8,10 @@
 #' @references Qian Li, Damla Senturk, Catherine A. Sugar, Shanali Jeste, Charlotte DiStefano, Joel Frohlich, Donatello Telesca
 #'   "\emph{Inferring Brain Signals Synchronicity from a Sample of EEG Readings}".
 #' @param X_array list of data arrays, each of which is organized as No.objects * No.observations * No.segments.
-#' @param max_d integer, maximal value of \code{d}
-#' @param par.spectrum vector, parameters for \code{\link{spec.parzen}}
-#' @param par.win vector, epoch smoothing parameters for \code{\link{ep_dismat}}
-#' @param n.iter integer, number of iterations for MIC fitting
+#' @param max_d integer, maximal value of \code{d} and \code{K} to be considered
+#' @param par.spectrum vector, spectral estimation parameters in the order of \code{c(a, wn, nn)} see \code{\link{spec.parzen}}
+#' @param par.win vector, epoch smoothing parameters see \code{\link{ep_dismat}}
+#' @param n.iter integer, number of iterations in \code{\link{MIC}} fitting
 #' @return A list of objects with the following components:
 #'   \item{\code{d}}{selected d}
 #'   \item{\code{K}}{selected K}
@@ -21,11 +21,11 @@
 #' # An example here
 #'
 #' ## Time series simulation:
-#'
 #' ts_sim <- MIC_sim(alpha = 0.9, nsub = 3, segs = 10, fs = 100)$Data
 #'
-#' ## d,K searching: (approx. 10 mins running time)
 #'
+#'
+#' ## d,K searching: \strong{(approx. 10 mins running time)}
 #' dk_search(ts_sim, n.iter = 2000, par.spectrum = c(50, 50), par.win = c(3,1))
 #'
 #' }

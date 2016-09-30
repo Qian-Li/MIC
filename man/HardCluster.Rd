@@ -7,16 +7,16 @@
 HardCluster(ClustList)
 }
 \arguments{
-\item{ClustList}{A matrix of clustering results whose row vectors are assignments, that have been properly aligned.
-Usually organized as No.Iterations * No.Objects.}
+\item{ClustList}{matrix, with row vectors being cluster labels that are properly aligned.
+Usually organized as No.iterations * No.objects.}
 }
 \value{
 A list of objects with the following components:
-  \item{\code{Cbest}}{Hard Clustering point estimate}
-  \item{\code{vec}}{A vector of Frobenius norm to the mean affinity}
+  \item{\code{Cbest}}{vector, hard clustering estimate}
+  \item{\code{vec}}{vector, Frobenius norm to the mean affinity (analog of deviation from the mean)}
 }
 \description{
-\code{HardCluster} produces a point clustering estimate from a sample of posterior estimates (MCMC outputs)
+\code{HardCluster} produces a point clustering estimate from a sample clustering labels (MCMC outputs)
 }
 \details{
 This procedure treats each clustering assignments as affinity matrices, and seek for a point estimate

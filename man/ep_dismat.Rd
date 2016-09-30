@@ -7,23 +7,24 @@
 ep_dismat(X, sf, par.spectrum = c(100, sf/2, 512), window = c(1, 0))
 }
 \arguments{
-\item{X}{A 3-D array of input organizing the data in the stucture of:
-No.Objects * No.Observations * No.Segments. Here objects refer to the clustering units;
-observations refer to the time series at each segment; and segments are pieces of time series
-that are repeatedly observed/measured of same length.}
+\item{X}{3-d array of input, organized as:
+No.objects * No.observations * No.segments. Here objects refer to the clustering units;
+observations refer to the recorded time series at each segment; and segments are pieces of recordings
+that are repeatedly observed/measured with same length.}
 
-\item{sf}{Sampling frequency}
+\item{sf}{integer, sampling frequency}
 
-\item{par.spectrum}{Parameter for \code{\link{spec.parzen}} in the order of \code{a, wn, nn}.}
+\item{par.spectrum}{vector, parameter for \code{\link{spec.parzen}} in the order of \code{c(a, wn, nn)}.}
 
-\item{window}{Epoch-smoothing window configuration, in the order of (window size, overlap size).
-For example, non-smoothing setting makes \code{window = c(1,0)}.}
+\item{window}{vector, epoch-smoothing setting in the order of window size and overlap size.
+For example, non-smoothing setting is equivalent to \code{window = c(1, 0)}, and \code{window = c(3, 1)}
+combines adjacent \strong{3 segnments as} epochs allowing for \strong{1 segment} overlapping in between.}
 }
 \value{
-a list object with the following components:
-  \item{\code{diss_array}}{Pairwise distance array, No.objects*No.objects*No.epochs}
-  \item{\code{ave_spec}}{Epochwise average spectral estimates using \code{\link{spec.parzen}}}
-  \item{\code{fw}}{Frequencies used for spectral estimate}
+a list of objects with the following components:
+  \item{\code{diss_array}}{3-d array of pairwise distance matrices, No.objects*No.objects*No.epochs}
+  \item{\code{ave_spec}}{3-d array of epochwise average spectrum see \code{\link{spec.parzen}}}
+  \item{\code{fw}}{vector, frequencies used for spectral estimate}
 }
 \description{
 \code{ep_dismat} calculates strucally smoothed pairwise distances across all objects.
@@ -38,5 +39,8 @@ The distance metric is based on the \code{\link{TVD}} between a pair of spectral
 
 Epochs are constructed by combining adjacent units (segments), which are further allowed
   to overlap with each other at certain amount.
+}
+\seealso{
+\code{\link{MIC_prep}} for usage
 }
 

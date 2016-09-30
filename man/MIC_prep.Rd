@@ -7,22 +7,22 @@
 MIC_prep(X, d, exclude = c(), par.spectrum = c(50), par.win = c(1, 0))
 }
 \arguments{
-\item{X}{3D array, organized as No.objects * No.observations * No.segments.}
+\item{X}{3-d array, organized as No.objects * No.observations * No.segments, see simulated example by \code{\link{MIC_sim}}}
 
-\item{d}{Dimensionality of the eigen-Laplacian representation.}
+\item{d}{integer, dimensionality of the eigen-Laplacian representation}
 
-\item{exclude}{Vector of integers, objects to be excluded.}
+\item{exclude}{vector of integers, indicating objects to be excluded}
 
-\item{par.spectrum}{Vector, parameters for \code{\link{spec.parzen}}}
+\item{par.spectrum}{vector, spectral estimation parameters in the order of \code{c(a, wn, nn)} see \code{\link{spec.parzen}}}
 
-\item{par.win}{Vector, epoch smoothing parameters for \code{\link{ep_dismat}}}
+\item{par.win}{Vector, epoch smoothing parameters see \code{\link{ep_dismat}}}
 }
 \value{
 List of data matrices, each with No.objects rows and \code{d} columns.
 }
 \description{
-\code{MIC_prep} carries out signal detrending, epoch smoothing, distance characterization and dimensional reduction sequentiall, therefore
- prepares the structured data for MIC analysis.
+\code{MIC_prep} prepares stuctured data for \code{MIC}. It sequentially carries out signal detrending, epoch smoothing,
+  distance characterization and dimensional reduction sequentiall.
 }
 \examples{
 \dontrun{
@@ -30,20 +30,18 @@ List of data matrices, each with No.objects rows and \code{d} columns.
 ts_sim <- MIC_sim(alpha = 0.9, nsub = 3, segs = 10, fs = 100)$Data
 
 # Data preparation, subject 1 epoch 1
-
 sub1 <- MIC_prep(ts_sim[[1]], d = 3, par.spectrum = c(50, 50), par.win = c(3, 1))
 
-# No. of epochs
 
+# No. of epochs
 length(sub1)
 
-# Epoch level data
 
+# Epoch data: No.objects * d
 dim(sub1[[1]])
 }
 }
 \seealso{
-\code{\link{spec.parzen}} for spectral estimate, \code{\link{ep_dismat}} for epoch smoothing, \code{\link{eigen_lap}} for eigen-Laplacian
- and \code{\link{MIC_sim}} for time series simulation.
+\code{\link{MIC}} for its usage and \code{\link{MIC_sim}} for time series simulation.
 }
 

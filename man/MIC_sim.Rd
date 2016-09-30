@@ -18,7 +18,7 @@ MIC_sim(alpha, nsub, segs, fs, Ct = rep(c(1, 2, 3, 4), rep(10, 4)),
 
 \item{Ct}{vector of integers, true group labels}
 
-\item{bad_sub}{integer, number of outlying subjects}
+\item{bad_sub}{integer, number of outlying subjects indexed as 1 to \code{bad_sub}}
 
 \item{scheme}{stationarity: 0 = stationary; 1 = piecewise stationary}
 }
@@ -26,25 +26,23 @@ MIC_sim(alpha, nsub, segs, fs, Ct = rep(c(1, 2, 3, 4), rep(10, 4)),
 A list of objects with the following components:
   \item{\code{C}}{True group label}
   \item{\code{Ci}}{True individual label}
-  \item{\code{Data}}{Simulated Data, list of 3-D arrays}
-  \item{\code{Points}}{Transition time points}
+  \item{\code{Data}}{Simulated Data, list of 3-d arrays}
+  \item{\code{Points}}{Time points of stationarity transitions}
 }
 \description{
-\code{MIC_sim} simulates multivariate picewise stationary time series for a sample of subjects.
+\code{MIC_sim} simulates multivariate time series for a sample of subjects, under stationary or piecewise stationary assumptions.
 }
 \examples{
 \dontrun{
 # Stationary simulation:
-
 x_stat <- MIC_sim(alpha = 0.9, nsub = 2, segs = 10, fs = 100)
 
 # # sample adherence (alpha)
-
   sum(x_stat$C == x_stat$Ci[, 1]) / length(x_stat$C)
 
 # # stationarity
-
   x_stat$Points
+
 
 # Non-stationary (piecewise stationary) simulation:
 

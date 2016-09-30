@@ -7,17 +7,17 @@
 eigen_lap(X, D)
 }
 \arguments{
-\item{X}{Output \code{diss_array} from \code{\link{ep_dismat}}, featuring pairwise distances on epoch-smoothed units.}
+\item{X}{3-d array, suggest \code{diss_array} from \code{\link{ep_dismat}}, symmetric distance matrices stacked into a 3-D array.}
 
-\item{D}{Dimensionality of the output, which correspond to the number of eigenvectors extracted from graph Laplacian.}
+\item{D}{integer, dimension of the output, corresponding to the number of eigenvectors extracted from graph Laplacian.}
 }
 \value{
 A list of objects with the following components:
-  \item{\code{eig_data}}{A 3-D array of the Eigen-Laplacian representation.}
-  \item{\code{eig_value}}{Corresponding eigen-values of the extracted eigen-vectors}
+  \item{\code{eig_data}}{A 3-d array of the eigen-Laplacian representation, No.objects * D * No.epochs}
+  \item{\code{eig_value}}{matrix, No.epochs * No.objects, complete eigen-values of graph Laplacian matrices}
 }
 \description{
-\code{eigen_lap} carries out eigen-decomposition on the Laplacian matrices, which
+\code{eigen_lap} carries out eigen-decomposition on the graph Laplacian matrices, which
   operates on distance matrices and yields low dimensional representations of original objects.
 }
 \details{

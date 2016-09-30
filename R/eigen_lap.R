@@ -1,6 +1,6 @@
 #' Eigen-Laplacian Dimension Reduction
 #'
-#' \code{eigen_lap} carries out eigen-decomposition on the Laplacian matrices, which
+#' \code{eigen_lap} carries out eigen-decomposition on the graph Laplacian matrices, which
 #'   operates on distance matrices and yields low dimensional representations of original objects.
 #'
 #' This procedure is a direct implementation of the spectral clustering technique explicated by [Ng 2001].
@@ -9,14 +9,12 @@
 #' @references Ng, Andrew Y., Michael I. Jordan, and Yair Weiss. \emph{On spectral clustering: Analysis and an algorithm.}
 #'   Advances in neural information processing systems 2 (2002): 849-856.
 #'
-#' @param X Output \code{diss_array} from \code{\link{ep_dismat}}, featuring pairwise distances on epoch-smoothed units.
-#' @param D Dimensionality of the output, which correspond to the number of eigenvectors extracted from graph Laplacian.
+#' @param X 3-d array, suggest \code{diss_array} from \code{\link{ep_dismat}}, symmetric distance matrices stacked into a 3-D array.
+#' @param D integer, dimension of the output, corresponding to the number of eigenvectors extracted from graph Laplacian.
 #' @return A list of objects with the following components:
-#'   \item{\code{eig_data}}{A 3-D array of the Eigen-Laplacian representation.}
-#'   \item{\code{eig_value}}{Corresponding eigen-values of the extracted eigen-vectors}
+#'   \item{\code{eig_data}}{A 3-d array of the eigen-Laplacian representation, No.objects * D * No.epochs}
+#'   \item{\code{eig_value}}{matrix, No.epochs * No.objects, complete eigen-values of graph Laplacian matrices}
 #'
-#'
-#' @export
 eigen_lap <- function(X, D){
   nc <- dim(X) [1]
   ne <- dim(X) [3]

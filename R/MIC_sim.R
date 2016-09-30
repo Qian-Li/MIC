@@ -1,6 +1,6 @@
 #' Time Series Simulation for MIC
 #'
-#' \code{MIC_sim} simulates multivariate picewise stationary time series for a sample of subjects.
+#' \code{MIC_sim} simulates multivariate time series for a sample of subjects, under stationary or piecewise stationary assumptions.
 #'
 #' @references Qian Li, Damla Senturk, Catherine A. Sugar, Shanali Jeste, Charlotte DiStefano, Joel Frohlich, Donatello Telesca
 #'   "\emph{Inferring Brain Signals Synchronicity from a Sample of EEG Readings}".
@@ -10,28 +10,26 @@
 #' @param segs integer, number of segments observed
 #' @param fs integer, sampling frequency
 #' @param Ct vector of integers, true group labels
-#' @param bad_sub integer, number of outlying subjects
+#' @param bad_sub integer, number of outlying subjects indexed as 1 to \code{bad_sub}
 #' @param scheme stationarity: 0 = stationary; 1 = piecewise stationary
 #'
 #' @return A list of objects with the following components:
 #'   \item{\code{C}}{True group label}
 #'   \item{\code{Ci}}{True individual label}
-#'   \item{\code{Data}}{Simulated Data, list of 3-D arrays}
-#'   \item{\code{Points}}{Transition time points}
+#'   \item{\code{Data}}{Simulated Data, list of 3-d arrays}
+#'   \item{\code{Points}}{Time points of stationarity transitions}
 #'
 #' @examples
 #' \dontrun{
 #' # Stationary simulation:
-#'
 #' x_stat <- MIC_sim(alpha = 0.9, nsub = 2, segs = 10, fs = 100)
 #'
 #' # # sample adherence (alpha)
-#'
 #'   sum(x_stat$C == x_stat$Ci[, 1]) / length(x_stat$C)
 #'
 #' # # stationarity
-#'
 #'   x_stat$Points
+#'
 #'
 #' # Non-stationary (piecewise stationary) simulation:
 #'
@@ -43,12 +41,7 @@ MIC_sim <- function(alpha,
                     nsub,
                     segs,
                     fs, Ct = rep(c(1, 2, 3, 4), rep(10, 4)), bad_sub = 0, scheme = 0){
-  # Helper function
-  pars<- function(eta, M = 1.1, fs){
-    phi1 <- - 1 / M ^ 2
-    phi2 <- 2 * cos(2 * pi * eta / fs) / M
-    return(c(phi2, phi1))
-  }
+  ## indices
   index <- c(1:length(unique(Ct)))
   nelec <- length(Ct)
   ## Subject level labels
