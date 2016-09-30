@@ -23,5 +23,6 @@ output <- MIC(X = list_data, K = 4, NumRun = 5000)
 
 Clustering result:
 ```r
+# Accuracy relative to the true group labels
 sum(clust_align(ts_sim$C, output$Cbest, type = 'vec') == ts_sim$C) / 40
 ```
