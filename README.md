@@ -15,6 +15,14 @@ Time series simulation:
 ts_sim <- MIC_sim(alpha = 0.9, nsub = 3, segs = 10, fs = 100)
 ```
 
+Data preparation:
+```r
+# Spectral estimation on simulated time series.
+list_data <- lapply(ts_sim$Data, function(x) MIC_prep(X = x, d = 4, 
+  par.spectrum = c(50, 50, 100), par.win = c(3, 1)))
+```
+
+
 MIC modle fitting:
 ```r
 # Running time approx. 3 mins
